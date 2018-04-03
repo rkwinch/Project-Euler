@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <math.h>
+
+int triangle(int val);
+int numDivisors(int num);
+
+int main(void) 
+{//1 
+  int x = 0;
+  int i=0;
+  int largeNumber = 0;
+  largeNumber = 5000000;
+  x=500; 
+  printf("num divisors is %d for %d\n",numDivisors(triangle(224)),triangle(224));//the number of divisors 
+  for(i=1;i<=largeNumber;i++)
+  {//2 
+    if(numDivisors(triangle(i))>x)
+    {//3 
+      printf("triangle # %d has > %d divisors\n",triangle(i),x);
+      break;
+    }//-3
+  }//-2 
+ 
+  return 0;
+}//-1 
+
+//gets triangle number of a given val 
+int triangle(int val)
+{
+  return ((pow(val,2)+val)/2);
+}
+
+int numDivisors(int num)
+{
+  int count = 0;
+  if(sqrt(num)*sqrt(num)==num)
+  {
+    count = count -1;
+  }
+  for(int i = 1;i<=sqrt(num);i++)
+  {
+    if(num%i==0)
+    {
+      count = count + 2;
+    }
+  }
+  return count;
+}//-1 
