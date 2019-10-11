@@ -26,44 +26,49 @@ What is the value of the first triangle number to have over five hundred divisor
 */
 
 int main(void) 
-{//1 
-  int x = 0;
-  int i=0;
-  int largeNumber = 0;
-  largeNumber = 5000000;
-  x=500; 
-  printf("num divisors is %d for %d\n",numDivisors(triangle(224)),triangle(224));//the number of divisors 
-  for(i=1;i<=largeNumber;i++)
-  {//2 
-    if(numDivisors(triangle(i))>x)
-    {//3 
-      printf("triangle # %d has > %d divisors\n",triangle(i),x);
+{ 
+  int x = 500;
+  int i = 0;
+  int largeNumber = 5000000;
+  
+  for(i = 1; i <= largeNumber; ++i)
+  { 
+    if(numDivisors(triangle(i)) > x)
+    { 
+      printf("triangle # %d has %d divisors\n",triangle(i),numDivisors(triangle(i)));
+      printf("(first triangle # with > 500 divisors)\n");
       break;
-    }//-3
-  }//-2 
+    }
+  } 
  
   return 0;
-}//-1 
+} 
 
 //gets triangle number of a given val 
-int triangle(int val)
+int triangle(int val) // the formula to calc a triangle # is val(val+1)/2
 {
-  return ((pow(val,2)+val)/2);
+  return ((pow(val,2) + val) / 2);
 }
 
 int numDivisors(int num)
 {
   int count = 0;
-  if(sqrt(num)*sqrt(num)==num)
+
+  // if perfect square, decrease count by 1 since we 
+  // don't want to double count the divisor
+  if((int)(sqrt(num)) * (int)(sqrt(num)) == num)
   {
-    count = count -1;
+    count -= 1;
   }
-  for(int i = 1;i<=sqrt(num);i++)
+
+  // count goes up by 2 since other divisor is on other side of sqrt(num)
+  for(int i = 1; i <= sqrt(num); ++i)
   {
-    if(num%i==0)
+    if(num % i == 0)
     {
-      count = count + 2;
+      count += 2;
     }
   }
+
   return count;
-}//-1
+}
